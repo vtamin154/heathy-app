@@ -21,6 +21,10 @@ const ListRegister = () => {
   const [start, setStart] = useState(0);
   const [end, setEnd] = useState(2);
 
+  const [totalPages, setTotalPages] = useState(
+    Math.ceil(registers.length / option)
+  );
+
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     // console.log(e.target.value)
     const val = e.target.value;
@@ -28,7 +32,6 @@ const ListRegister = () => {
   };
 
   const handleShowItemPerPage = () => {
-    setRegisters(listRegister);
     setShowItemPerPage(registers.slice(start, end));
   };
 
@@ -45,6 +48,7 @@ const ListRegister = () => {
 
     localStorage.setItem('register-form', JSON.stringify(newData));
     setRegisters(newData);
+    setTotalPages(Math.ceil(registers.length / option));
     setShowItemPerPage(newData.slice(start, end));
   };
 
@@ -54,20 +58,34 @@ const ListRegister = () => {
     setEnd((currentPage - 1) * option + option);
   }, [option, currentPage]);
 
+
+  //for search
   useEffect(() => {
     const newList = listRegister.filter((item: any) =>
-      Object.values(item).join().toLocaleLowerCase().includes(search.toLocaleLowerCase())
+      Object.values(item)
+        .join()
+        .toLocaleLowerCase()
+        .includes(search.toLocaleLowerCase())
     );
 
     setRegisters(newList);
+
+    setTotalPages(Math.ceil(registers.length / option));
     setShowItemPerPage(newList.slice(start, end));
   }, [search, start, end]);
 
   useEffect(() => {
     handleShowItemPerPage();
-  }, [start, end]);
+  }, [currentPage]);
+
+  useEffect(() => {
+    if(totalPages < currentPage){
+      setCurrentPage(1);
+    } 
+  }, [totalPages, search]);
 
   // console.log(registers);
+  // console.log(totalPages)
 
   return (
     <div className="list-register container">
@@ -109,8 +127,9 @@ const ListRegister = () => {
               <Form>
                 <div className="d-flex justify-content-center align-items-center">
                   <Pagination
-                    option={option}
-                    totalRegister={registers.length}
+                    // option={option}
+                    // totalRegister={registers.length}
+                    totalPages={totalPages}
                     currentPage={currentPage}
                     handleCurrentPage={handleCurrentPage}
                   />

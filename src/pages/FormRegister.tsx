@@ -20,7 +20,7 @@ const FormRegister = () => {
     // console.log(existItemIndex)
     // console.log(values)
     let newItem, newData;
-    if (existItemIndex > 0) {
+    if (existItemIndex >= 0) {
       newItem = { ...values, id: idItem };
       newData = [
         ...localData.slice(0, existItemIndex),

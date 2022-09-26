@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from 'react';
 
 interface PropsPagination {
-  option: number;
-  totalRegister: number;
+  // option: number;
+  // totalRegister: number;
+  totalPages:number;
   currentPage: number;
   handleCurrentPage: (curPage: number) => void;
 }
 
 const Pagination: React.FC<PropsPagination> = ({
-  option,
-  totalRegister,
+  // option,
+  // totalRegister,
+  totalPages,
   currentPage,
   handleCurrentPage,
 }) => {
   const [showChoices, setShowChoices] = useState(3);
-  const totalPages = Math.ceil(totalRegister / option);
+  // const totalPages = Math.ceil(totalRegister / option);
 
   useEffect(() => {
     currentPage > totalPages - 4
