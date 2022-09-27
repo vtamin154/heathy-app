@@ -66,7 +66,7 @@ const TravelItem: React.FC<PropsTravel> = ({ data, remove, push, index }) => {
           >
             Add more
           </button>
-          <button className="btn btn-danger mx-3" onClick={() => remove(index)}>
+          <button type='button'  className="btn btn-danger mx-3" onClick={() => remove(index)}>
             Delete
           </button>
         </div>
