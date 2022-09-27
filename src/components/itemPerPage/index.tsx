@@ -11,12 +11,13 @@ const ItemPerPage: React.FC<PropsItemPerPage> = ({
   options,
   handleChangeOption,
 }) => {
-  const { values } = useFormikContext<TValuesList>();
+  const { values } = useFormikContext<TValuesList>();// lấy toàn bộ dữ liệu nhập ở form (fullname, object, gender,...)
   // console.log(values);
 
   useEffect(() => {
     handleChangeOption(Number(values.itemsPerPage));
   }, [values.itemsPerPage]);
+
   return (
     <div className="d-flex align-items-center">
       <Field

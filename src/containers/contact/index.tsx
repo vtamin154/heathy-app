@@ -9,16 +9,15 @@ const Contact = () => {
   const { values, submitForm } = useFormikContext<TValuesForm>();
 
   const listProvince = Object.values(provinces).map((item) => [
-    // item[0],
     item[1].name,
-  ]);
+  ]); // tạo thành mảng [Bắc Ninh, Bắc Giang,...]
 
   // console.log(listProvince)
 
   // console.log(values.province);
   const listDistrict = Object.values(provinces).filter((item) =>
     item[1].name === values.province ? item[0][1] : ''
-  )[0]?.[1]?.cities;
+  )[0]?.[1]?.cities;// lấy các huyện tương ứng với tỉnh
 
   const { province } = values;
   const [district, setDistrict] = useState<any>([]);

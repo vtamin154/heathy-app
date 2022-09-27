@@ -18,7 +18,7 @@ const Travel: React.FC = () => {
           <FieldArray name="travel">
             {({ remove, push }) => {
               const onRemove = (index: number) => {
-                if (Object.values(values.travel[index]).join('') !== '') {
+                if (Object.values(values.travel[index]).join('') !== '') {// kiểm tra xem trong mảng travel có phần tử nào chưa, nếu có, khi xóa sẽ hiển thị confirm để xác nhận xóa hay cancel, nếu không cứ thế xóa
                   const confirm: boolean = window.confirm(
                     'Do you want to remove?'
                   );

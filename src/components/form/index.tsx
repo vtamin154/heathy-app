@@ -29,7 +29,7 @@ const FormField: React.FC<PropsFormField> = ({ dataEdit, handleSubmit }) => {
       >
         {(props) => {
           const handleAction = (confirmMsg: string, action: any) => {
-            // if (props.dirty) {
+            // if (props.dirty) { //dirty để kiểm tra xem dữ liệu có được nhập mới vào ko
               const confirm: boolean = window.confirm(confirmMsg);
               return confirm ? action() : null;
             // }

@@ -2,9 +2,6 @@ import FieldInput from '../../components/input/inputText';
 import FieldSelect from '../../components/selection';
 import { optionsObject, gender, nationality } from '../../assets/data';
 
-
-// import './style.css';
-
 const PersonalInfor = () => {
   return (
     <div className="container personal-infor px-0">

@@ -8,18 +8,20 @@ import { Form, Formik } from 'formik';
 import { initialListRegister } from '../assets/initial';
 
 const ListRegister = () => {
+  //data lưu trong local
   const listRegister = JSON.parse(
     localStorage.getItem('register-form') || '[]'
   );
 
   const [search, setSearch] = useState('');
-  const [registers, setRegisters] = useState(listRegister);
-  const [showItemPerPage, setShowItemPerPage] = useState(registers.slice(0, 2));
-  const [option, setOption] = useState(2);
+  const [registers, setRegisters] = useState(listRegister);// data sử dụng để hiển thị (ví dụ như lúc search or chưa search sẽ đk lưu vào đây)
+  const [showItemPerPage, setShowItemPerPage] = useState(registers.slice(0, 2));// show số dòng hiển thị trong table cho mỗi trang
+  const [option, setOption] = useState(2);//số dòng hiển thị trên table
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [start, setStart] = useState(0);
-  const [end, setEnd] = useState(2);
+
+  const [start, setStart] = useState(0); //vị trí bắt đầu hiển thị (vd currentPage = 2 sẽ hiển thị phần tử thứ 2 và 3 trong registers (index bắt đầu từ 0), nên vị trí start = 2, end = 4)
+  const [end, setEnd] = useState(2);// vị trí kết thúc
 
   const [totalPages, setTotalPages] = useState(
     Math.ceil(registers.length / option)
@@ -78,6 +80,7 @@ const ListRegister = () => {
     handleShowItemPerPage();
   }, [currentPage]);
 
+  //xử lý số trang sau khi search
   useEffect(() => {
     if(totalPages < currentPage){
       setCurrentPage(1);

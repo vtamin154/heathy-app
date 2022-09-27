@@ -15,13 +15,12 @@ const Pagination: React.FC<PropsPagination> = ({
   currentPage,
   handleCurrentPage,
 }) => {
-  const [showChoices, setShowChoices] = useState(3);
-  // const totalPages = Math.ceil(totalRegister / option);
+  const [showChoices, setShowChoices] = useState(3); // show số trang (1,2,3,...)
 
-  useEffect(() => {
+  useEffect(() => { 
     currentPage > totalPages - 4
-      ? setShowChoices(totalPages)
-      : setShowChoices(currentPage + 4);
+      ? setShowChoices(totalPages) // vd trang hiện tại là 3, tổng số trang là 5 thì pagination sẽ hiển thị hết 1,2,3,4,5
+      : setShowChoices(currentPage + 4); // vd trang hiện tại là 1, tổng số trang là 5 thì pagination hiển thị 1,2,3,[...],5 (tổng là hiển thị 5 cái) 
   }, [currentPage, totalPages]);
 
   // console.log('show' + showChoices, 'cur' + currentPage, 'total'+ totalPages)
@@ -76,14 +75,13 @@ const Pagination: React.FC<PropsPagination> = ({
               <button
                 type="button"
                 className="btn btn-outline-light text-primary rounded-0"
-                // style={{ padding: '0.4rem 0.7rem' }}
               >
                 {totalPages}
               </button>
             </li>
           );
 
-        if (currentPage < totalPages - 3 && index === showChoices - 2)
+        if (currentPage < totalPages - 3 && index === showChoices - 2)// vd currentPage = 1, totalPages = 5, showChoices = 5 (lấy ở dòng 23), index chạy đến khi = 3 thì hiển thị [...] - 1,2,3,[...],5 (... sẽ hiển thị ở vị trí thứ 4)
           return (
             <li key={index} className="border text-primary" 
             style={{ padding: '0.45rem 0.7rem' }}
@@ -98,7 +96,6 @@ const Pagination: React.FC<PropsPagination> = ({
             key={index}
             className="border"
             onClick={() => handleCurrentPage(index + 1)}
-            // style={{ padding: '0.4rem 0.7rem' }}
           >
             <button
               type="button"
